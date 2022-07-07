@@ -1,26 +1,34 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import { Routes, Route, Link, Outlet } from "react-router-dom";
+import Home from "./pages/home/Home";
+import "./App.scss";
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <Routes>
+      <Route path="/" element={<Layout />}>
+        <Route path="home" element={<Home />} />
+        <Route path="invoices" element={<Invoices />} />
+      </Route>
+    </Routes>
+  );
+}
+
+function Layout() {
+  return (
+    <div>
+      <h1>Welcome to the app!</h1>
+      <nav>
+        <Link to="invoices">Invoices</Link>
+      </nav>
+      <div className="content">
+        <Outlet />
+      </div>
     </div>
   );
+}
+
+function Invoices() {
+  return <h1>Invoices</h1>;
 }
 
 export default App;
